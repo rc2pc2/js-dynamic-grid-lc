@@ -4,42 +4,61 @@ const mainContentEl = document.querySelector('main section.main-content');
 
 const startButtonEl = document.querySelector('button#button-start');
 
+const difficultySelectorEl = document.querySelector('select#select-difficulty');
+
 startButtonEl.addEventListener('click', function(){
-    mainContentEl.innerHTML = '';
+    generateNewGame(mainContentEl, difficultySelectorEl);
+});
 
-    // # per 81 iterazioni...
-    for (let i = 1 ; i <= 81 ; i++){
-        // # creo un nuovo elemento quadrato, una nuova cella nel mio quadrato
+
+// ? ------ Functions ------ ?
+
+function generateNewGame(wrapperElement, levelSelector){
+    wrapperElement.innerHTML = '';
+
+    const level = parseInt(levelSelector.value);
+    let cellsNo;
+
+    switch (level){
+        case 0:
+        default:
+            cellsNo = 100;
+            break;
+        case 1:
+            cellsNo = 81;
+            break;
+        case 2:
+            cellsNo = 49;
+            break;
+    }
+
+    let cellsPerRow = Math.sqrt(cellsNo);
+
+    for (let i = 1 ; i <= cellsNo ; i++){
         const currentSquare = getNewSquare();
-
-        // # inizializzo il suo contenuto per poterlo utilizzare anche piu' avanti
         const squareContent = i;
 
-        // # aggiungo il contenuto all'elemento che voglio popolare
         currentSquare.innerHTML += `<span> ${squareContent} </span>`;
 
-        // # aggiungo il comportamento che preveda che se il numero interno sia pari allora diventera' blu al click, altrimenti diventera' rosso.
+        const cellSize = `calc(100% / ${cellsPerRow})`;
+        currentSquare.style.width = cellSize;
+        currentSquare.style.height= cellSize;
+
         if ( squareContent % 2 === 0){
             currentSquare.classList.add('bg-blue');
         } else {
             currentSquare.classList.add('bg-red');
         }
 
-        // % quando clicco su una di queste celle
         currentSquare.addEventListener('click', function(){
-            // % metto o  tolgo la classe css clicked allo stesso elemento
-            currentSquare.classList.toggle('clicked'); // si potrebbe sostituire a currentSquare il this
-
+            currentSquare.classList.toggle('clicked');
             console.log(squareContent);
         });
 
-        // & aggiungo la cella completa all'elemento a cui voglio aggiungerla nel DOM.
-        mainContentEl.appendChild(currentSquare);
+        wrapperElement.appendChild(currentSquare);
     }
-});
+}
 
-
-// ? ------ Functions ------ ?
 
 /**
  * Creates a new square element, an article with class 'item-square' and returns it to the caller.
