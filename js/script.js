@@ -2,33 +2,41 @@
 // recupero il parent all'interno del quale voglio inserire i miei elementi
 const mainContentEl = document.querySelector('main section.main-content');
 
-// # per 81 iterazioni...
-for (let i = 1 ; i <= 81 ; i++){
-    // # creo un nuovo elemento quadrato, una nuova cella nel mio quadrato
-    const currentSquare = getNewSquare();
+const startButtonEl = document.querySelector('button#button-start');
 
-    // # inizializzo il suo contenuto per poterlo utilizzare anche piu' avanti
-    const squareContent = i;
+startButtonEl.addEventListener('click', function(){
+    mainContentEl.innerHTML = '';
 
-    // # aggiungo il contenuto all'elemento che voglio popolare
-    currentSquare.innerHTML += `<span> ${squareContent} </span>`;
+    // # per 81 iterazioni...
+    for (let i = 1 ; i <= 81 ; i++){
+        // # creo un nuovo elemento quadrato, una nuova cella nel mio quadrato
+        const currentSquare = getNewSquare();
 
-    // # aggiungo il comportamento che preveda che se il numero interno sia pari allora diventera' blu al click, altrimenti diventera' rosso.
-    if ( squareContent % 2 === 0){
-        currentSquare.classList.add('bg-blue');
-    } else {
-        currentSquare.classList.add('bg-red');
+        // # inizializzo il suo contenuto per poterlo utilizzare anche piu' avanti
+        const squareContent = i;
+
+        // # aggiungo il contenuto all'elemento che voglio popolare
+        currentSquare.innerHTML += `<span> ${squareContent} </span>`;
+
+        // # aggiungo il comportamento che preveda che se il numero interno sia pari allora diventera' blu al click, altrimenti diventera' rosso.
+        if ( squareContent % 2 === 0){
+            currentSquare.classList.add('bg-blue');
+        } else {
+            currentSquare.classList.add('bg-red');
+        }
+
+        // % quando clicco su una di queste celle
+        currentSquare.addEventListener('click', function(){
+            // % metto o  tolgo la classe css clicked allo stesso elemento
+            currentSquare.classList.toggle('clicked'); // si potrebbe sostituire a currentSquare il this
+
+            console.log(squareContent);
+        });
+
+        // & aggiungo la cella completa all'elemento a cui voglio aggiungerla nel DOM.
+        mainContentEl.appendChild(currentSquare);
     }
-
-    // % quando clicco su una di queste celle
-    currentSquare.addEventListener('click', function(){
-        // % metto o tolgo la classe css clicked allo stesso elemento
-        currentSquare.classList.toggle('clicked'); // si potrebbe sostituire a currentSquare il this
-    });
-
-    // & aggiungo la cella completa all'elemento a cui voglio aggiungerla nel DOM.
-    mainContentEl.appendChild(currentSquare);
-}
+});
 
 
 // ? ------ Functions ------ ?

@@ -17,9 +17,23 @@ h2{
     margin-bottom: 2rem;
 }
 
+button{
+    border: none;
+    font-size: 1.25rem;
+    padding: .4rem .8rem;
+    border-radius: 15px;
+    background-color: #1bdf9e;
+    color: white;
+}
+
+button:hover{
+    background-color: #74e3be;
+}
+
 main{
     padding: 2rem;
 }
+
 
 section.main-content{
     width: 550px;
