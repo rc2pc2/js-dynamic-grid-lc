@@ -59,7 +59,7 @@ section.main-content article.item-square{
 }
 
 section.main-content article.item-square span{
-    display: none;
+    /* display: none; */
 }
 
 section.main-content article.item-square.clicked.bg-blue{
