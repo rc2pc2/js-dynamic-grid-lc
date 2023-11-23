@@ -58,9 +58,6 @@ section.main-content article.item-square{
     text-align: center;
 }
 
-section.main-content article.item-square span{
-    /* display: none; */
-}
 
 section.main-content article.item-square.clicked.bg-blue{
     background-color: #1bdf9e;
